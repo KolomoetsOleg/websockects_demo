@@ -1,0 +1,6 @@
+.row
+  - @users.each do |user|
+    .col-md-4{class: "user_#{user[:id]}"}
+      %ul{class: "user_#{user[:id]}"}
+      %input{class: "user_#{user[:id]}", type: 'text', name: "user_#{user[:id]}"}
+      %a.btn.btn-default{id: "#{user[:id]}"} Отправить

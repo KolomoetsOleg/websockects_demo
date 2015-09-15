@@ -4,7 +4,9 @@ WebsocketRails::EventMap.describe do
   # actions will be executed in the order they were subscribed.
   #
   # Uncomment and edit the next line to handle the client connected event:
-    subscribe :client_connected, :to => Controller, :with_method => :method_name
+  namespace :chat do
+    subscribe :new, :to => Sockets::ChatController, :with_method => :new
+  end
   #
   # Here is an example of mapping namespaced events:
   #   namespace :product do
