@@ -1,14 +1,13 @@
 class Sockets::ChatController < WebsocketRails::BaseController
   def initialize_session
-    # perform application setup here
-    # controller_store[:test_var] = 0
+
   end
 
   def new
-    if message[:text] == "return false"
-      trigger_failure false
-    else
-      trigger_success true
+    post = Post.new(content: message[:text], user_id: message[:user_id])
+    if post.save
+      WebsocketRails[:new].trigger 'new_post', post
     end
   end
+
 end

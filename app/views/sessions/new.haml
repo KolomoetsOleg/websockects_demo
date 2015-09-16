@@ -10,6 +10,9 @@
       .form-group
         = label_tag :password
         = password_field_tag :password, nil, class: 'form-control', required: true
+      .form-group
+        = label_tag "Connection type"
+        = select_tag :connection_type, options_for_select( CONNECTION_TYPE.map{|k, v| [k.to_s, v]}), class: 'form-control', required: true
 
       = submit_tag "Sign in", class: "btn btn-primary "
       = link_to 'Sign Up', new_user_path, class: 'btn btn-default'
