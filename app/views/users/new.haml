@@ -1,0 +1,16 @@
+%h1
+  Sign Up
+
+.row
+  .col-md-4
+    = form_for @user, url: { controller: :users, action: :create } do |f|
+      .form-group
+        = f.label :username
+        = f.text_field :username, class: 'form-control', required: true
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control', required: true
+
+      = f.submit "Sign up", class: "btn btn-primary "
+      = link_to "Back", :back, class: "btn btn-default "
+

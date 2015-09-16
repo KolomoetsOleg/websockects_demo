@@ -5,12 +5,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-
+    user = login(session_params[:username], session_params[:password])
+    if user
+      redirect_to home_index_path
+    else
+      redirect_to :back
+    end
   end
 
   private
 
   def session_params
-    params.require(:user).permit(:username, :password)
+    params.permit(:username, :password)
   end
 end
