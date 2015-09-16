@@ -34,4 +34,6 @@ gem 'websocket-rails'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 
+gem "sorcery"
+
 
