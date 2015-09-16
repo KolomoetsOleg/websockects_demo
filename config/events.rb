@@ -7,6 +7,7 @@ WebsocketRails::EventMap.describe do
   namespace :chat do
     subscribe :new, :to => Sockets::ChatController, :with_method => :new
   end
+
   #
   # Here is an example of mapping namespaced events:
   #   namespace :product do

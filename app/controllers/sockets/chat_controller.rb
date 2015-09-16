@@ -6,7 +6,9 @@ class Sockets::ChatController < WebsocketRails::BaseController
   def new
     post = Post.new(content: message[:text], user_id: message[:user_id])
     if post.save
-      WebsocketRails[:new].trigger 'new_post', post
+      trigger_success true
+    else
+      trigger_failure post.errors
     end
   end
 

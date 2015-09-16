@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create]
-  resources :home, only: [:index]
+  resources :chat, only: [:index] do
+    get :new_posts, on: :collection
+  end
 end

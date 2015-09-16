@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = login(session_params[:username], session_params[:password])
     if user
       cookies[:connection_type] = params[:connection_type]
-      redirect_to home_index_path
+      redirect_to chat_index_path
     else
       redirect_to :back
     end
