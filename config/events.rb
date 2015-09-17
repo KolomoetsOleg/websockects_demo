@@ -5,7 +5,7 @@ WebsocketRails::EventMap.describe do
   #
   # Uncomment and edit the next line to handle the client connected event:
   namespace :chat do
-    subscribe :new, :to => Sockets::ChatController, :with_method => :new
+    subscribe :new_post, :to => Sockets::ChatController, :with_method => :new
   end
 
   #

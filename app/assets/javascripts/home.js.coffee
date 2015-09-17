@@ -44,18 +44,17 @@ long_polling = () ->
 http_streaming = () ->
   source = new EventSource('/chat/stream')
   source.onmessage = (response) ->
-    console.log(JSON.parse(response.data))
-#    parseResponse(JSON.parse(response))
+    parseResponse(JSON.parse(response.data))
   return
 
 web_sockets = () ->
   dispatcher = new WebSocketRails('localhost:3000/websocket');
-  channel = dispatcher.subscribe('new')
+  channel = dispatcher.subscribe('new_post')
 
   $(".col-md-4 .btn.btn-default").on "click", ->
     user_id = this.id
     text =  $('input.user_'+user_id).val()
-    dispatcher.trigger('chat.new', { text: text, user_id: user_id },
+    dispatcher.trigger('chat.new_post', { text: text, user_id: user_id },
       (responce)->
         return
       (response) ->
@@ -66,7 +65,7 @@ web_sockets = () ->
     return
 
 
-  channel.bind 'new_post', (response) ->
+  channel.bind 'post_created', (response) ->
     parseResponse(JSON.parse(response))
     return
   return
