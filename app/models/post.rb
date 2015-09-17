@@ -7,6 +7,6 @@ class Post < ActiveRecord::Base
   private
 
   def web_sockets_notify
-    WebsocketRails[:new].trigger 'new_post', self
+    WebsocketRails[:new].trigger 'new_post', self.to_json(include: :author)
   end
 end

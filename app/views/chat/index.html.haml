@@ -3,7 +3,7 @@
     %ul{class: "user_#{current_user.id}"}
       - @recent_posts.each do |post|
         %li{style:  ("color: green;" if post.user_id.eql?(current_user.id)), id: post.id }
-          = post.content
+          =  "#{post.author.username}: => #{post.content}"
     %input{class: "user_#{current_user.id}", type: 'text', name: "user_#{current_user.id}"}
     %a.btn.btn-default{id: "#{current_user.id}"} Отправить
     = link_to "Log out", session_path(current_user.id), method: :delete, class: "btn btn-danger"

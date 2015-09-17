@@ -16,6 +16,18 @@ $(document).on 'ready page:load', ->
 
 
 short_polling = () ->
+  $(".col-md-4 .btn.btn-default").on "click", ->
+    user_id = this.id
+    text =  $('input.user_'+user_id).val()
+    $.post(
+      new_post_url(), { text: text, user_id: user_id }
+    ).done( (response) ->
+      return
+    ).fail( ()->
+      $('input').val("")
+      return
+    )
+    return
   cur_time = $.now()/1000 | 0
   setInterval (->
     updatePosts(cur_time)
@@ -52,7 +64,7 @@ web_sockets = () ->
 
 
   channel.bind 'new_post', (response) ->
-    parseResponse(response)
+    parseResponse(JSON.parse(response))
     return
   return
 
@@ -64,7 +76,8 @@ web_sockets = () ->
   url = "/chat/new_posts"
   $.get(url, { last_post_id: last_post_id, cur_time: cur_time }
   ).done((response)->
-    $.each response.posts, (k, post) ->
+    parsed_res = JSON.parse(response.posts)
+    $.each parsed_res, (k, post) ->
       parseResponse(post)
       return
   ).fail( (response) ->
@@ -76,9 +89,12 @@ parseResponse=(response)  ->
   $(".row ul").append(
     ()->
       if this.className == "user_" + response.user_id
-        return  "<li id='"+response.id+"'  style='color:green;' >"+response.content+"</li>"
+        return  "<li id='"+response.id+"'  style='color:green;' >"+ response.author.username + ": => " + response.content+"</li>"
       else
-        return  "<li id='"+ response.id +"'>"+response.content+"</li>"
+        return  "<li id='"+response.id+"' >"+ response.author.username + ": => " +response.content+"</li>"
   )
   $('input').val("")
   return
+
+new_post_url=() ->
+  "/chat"
