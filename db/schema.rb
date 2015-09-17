@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150916100238) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.text     "content"
@@ -28,6 +31,6 @@ ActiveRecord::Schema.define(version: 20150916100238) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

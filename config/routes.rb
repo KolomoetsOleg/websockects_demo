@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :chat, only: [:index, :create] do
     get :new_posts, on: :collection
+    get :stream, on: :collection
   end
 end

@@ -42,7 +42,10 @@ long_polling = () ->
   return
 
 http_streaming = () ->
-
+  source = new EventSource('/chat/stream')
+  source.onmessage = (response) ->
+    console.log(JSON.parse(response.data))
+#    parseResponse(JSON.parse(response))
   return
 
 web_sockets = () ->
