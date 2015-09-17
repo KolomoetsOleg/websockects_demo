@@ -15,8 +15,8 @@
 /log/*.log
 /tmp
 
-/configs/secrets.yml
-/configs/database.yml
+/config/secrets.yml
+/config/database.yml
 
 /.idea/*
 /.idea
