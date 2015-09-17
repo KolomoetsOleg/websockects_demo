@@ -14,6 +14,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    logout
+    cookies[:connection_type] = 0
+    redirect_to root_path
+  end
+
   private
 
   def session_params
